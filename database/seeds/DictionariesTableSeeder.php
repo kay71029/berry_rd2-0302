@@ -19,8 +19,8 @@ class DictionariesTableSeeder extends Seeder
         $limit = 100;
         //英文假資料
         for ($i = 0; $i < $limit; $i++) {
-            DB::table('dictionaries')->insert([ //,
-                'lang' => 'en',
+            DB::table('dictionaries')->insert([
+                'lang' => 'en_US',
                 'word' => $faker->unique()->word,
                 'founder' =>'user1',
                 'created_at' => new DateTime,
@@ -29,7 +29,7 @@ class DictionariesTableSeeder extends Seeder
         }
         //中文假資料_zh_CN
         for ($i = 0; $i < $limit; $i++) {
-            DB::table('dictionaries')->insert([ //,
+            DB::table('dictionaries')->insert([
                 'lang' => 'zh_CN',
                 'word' => $faker2->unique()->name,
                 'founder' =>'user2',
@@ -39,7 +39,7 @@ class DictionariesTableSeeder extends Seeder
         }
         //中文假資料_zh_TW
         for ($i = 0; $i < $limit; $i++) {
-            DB::table('dictionaries')->insert([ //,
+            DB::table('dictionaries')->insert([
                 'lang' => 'zh_TW',
                 'word' => $faker3->unique()->name,
                 'founder' =>'user3',
