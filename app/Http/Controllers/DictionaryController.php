@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dictionary;
+use App\Language;
 use DB;
 class DictionaryController extends Controller
 {
@@ -12,9 +13,15 @@ class DictionaryController extends Controller
     public function searchAllWord()
     {
         $dictionary_model = new Dictionary;
-        $array = $dictionary_model->searchAllWord( );
-        //$a = var_dump($array);
-        //return view( '/testword', $a);
+        $ret_word = $dictionary_model->searchAllWord();
+
+        $langSystem_model = new Language;
+        $ret_lang = $langSystem_model->AllLangSystem( );
+
+
+
+        return view( '/searchword',  ['words' => $ret_word,'langs' => $ret_lang]);
+
     }
 
     //依照分語系查詢字彙
@@ -23,8 +30,8 @@ class DictionaryController extends Controller
         $dictionary_model = new Dictionary;
         $array = $dictionary_model->languageSystemSearchWord($lang);
        // $a = var_dump($array);
-        //return view( '/testword', $array);
-        dd($array);
+        return view( '/addVocabulary', ['Dictionary' => $array]);
+        //dd($array);
     }
 
     //模糊查詢字彙字彙

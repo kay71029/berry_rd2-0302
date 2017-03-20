@@ -35,37 +35,95 @@
     </div>
     <div class = "panel-body">
         <div class = "dataTable_wrapper">
-            <table width = "100%" class = "table table-striped table-bordered table-hover" id = "dataTables-example">
-                <form role="form">
-                    <div class="form-group">
-                        <label>語系選擇</label>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">繁體中文
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">簡體中文
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">English
-                            </label>
+            <div id="page-wrapper">
+                <div class="row">
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-default" style="height:200px">
+                            <div class="panel-heading">
+                                語系查詢
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <h4>語系選擇</h4>
+                                <form role="form">
+                                    <div class="form-group">
+                                        @foreach($langs as $key => $lang)
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox">{{$lang->lang}}
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                    <button type="submit" class="btn btn-default">查詢</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>輸入查詢</label>
-                        <textarea class="form-control" rows="10"></textarea>
+                    <div class="col-lg-6">
+                        <div class="panel panel-default" style="height:200px" >
+                            <div class="panel-heading">
+                                模糊查詢輸入查詢
+                            </div>
+                            <div class="panel-body">
+                                <h4>輸入查詢</h4>
+                                <form role="form">
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows='1'></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">查詢</button>
+                                    <button type="reset" class="btn btn-default">重置</button>
+                            </div>
+                        </div>
+                        <!-- /.panel -->
                     </div>
-                    <button type="submit" class="btn btn-default">查詢</button>
-                    <button type="reset" class="btn btn-default">重置</button>
-                </form>
-            </table>
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class = "panel panel-default">
+                    <div class = "panel-heading">
+                        查詢結果
+                    </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>編號</th>
+                            <th>Words</th>
+                        </tr>
+                        </thead>
+                        {{--@foreach($words as $key => $word)
+                        <tr>
+                            <td>{{$key+1}}</td>
+                            <td>{{$word->word}}</td>
+                        </tr>
+                        @endforeach
+
+                        --}}</tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </div>
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="row">
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-6">
+
+            </div>
+
+            <!-- /.col-lg-6 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
 <script src = "/js/jquery.js"></script>
 <script src = "/js/bootstrap.min.js"></script>
 </body>
