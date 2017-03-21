@@ -9,44 +9,40 @@ use App\Dictionary;
 
 class DictionaryController extends Controller
 {
-    public function index()
+    public function AllLangSystem()
     {
-        //語系選擇
+        //所有語系
         $langSystem_model = new Language;
         $ret = $langSystem_model->AllLangSystem();
         return view('/SearchWord', ['ret_lang' => $ret]);
     }
 
-    //不分語系查詢字彙字彙
-    public function searchAllWord()
+    public function languageSystemSearchWord(Request $request)
     {
+        //依照分語系查詢字彙
+        $lang = $request->get('lang');
+        $all = $request->get('all');
         $dictionary_model = new Dictionary;
-        $ret_word = $dictionary_model->searchAllWord();
 
-        $langSystem_model = new Language;
-        $ret_lang = $langSystem_model->AllLangSystem( );
-        return view( '/SearchWord',  ['words' => $ret_word]);
-
+        if ($all == "all")
+        {
+            $ret = $dictionary_model->searchAllWord();
+        }
+        else
+        {
+            $dictionary_model = new Dictionary;
+            $ret = $dictionary_model->languageSystemSearchWord($lang);
+        }
+        return view('/testWord', ['words' => $ret]);
     }
 
-    //依照分語系查詢字彙
-    public function languageSystemSearchWord($lang = 'en')
+    public function blurrySearchWord(Request $request)
     {
+        //模糊查詢字彙字彙
+        $word = $request->get('word');
         $dictionary_model = new Dictionary;
-        $array = $dictionary_model->languageSystemSearchWord($lang);
-       // $a = var_dump($array);
-        return view( '/addVocabulary', ['Dictionary' => $array]);
-        //dd($array);
-    }
-
-    //模糊查詢字彙字彙
-    public function blurrySearchWord($word = 'a')
-    {
-        $dictionary_model = new Dictionary;
-        $array = $dictionary_model->blurrySearchWord($word);
-        // $a = var_dump($array);
-        //return view( '/testword', $array);
-        dd($array);
+        $ret = $dictionary_model->blurrySearchWord($word);
+        return view( '/testWord',  ['words' => $ret]);
     }
 
 }

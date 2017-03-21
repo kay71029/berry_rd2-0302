@@ -51,7 +51,7 @@
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="all"value="all">ALL
+                                            <input type="checkbox" >ALL
                                         </label>
                                      @foreach($ret_lang as $key => $lang)
                                           <label class="checkbox-inline">
@@ -71,10 +71,9 @@
                                 模糊查詢
                             </div>
                             <div class="panel-body">
-                                <form role="form" action="blurrySearchWord" method="POST">
-                                    {{ csrf_field() }}
+                                <form role="form">
                                     <div class="form-group">
-                                        <textarea class="form-control" rows='3' name="word" ></textarea>
+                                        <textarea class="form-control" rows='3'></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-default">查詢</button>
                                     <button type="reset" class="btn btn-default">重置</button>
@@ -98,20 +97,34 @@
                             <th>詞彙</th>
                         </tr>
                         </thead>
-                        {{--
                         @foreach($words as $key => $word)
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$word->word}}</td>
                         </tr>
                         @endforeach
---}}
+
                         </tbody>
                     </table>
                 </div>
         </div>
     </div>
 </div>
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="row">
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-6">
+
+            </div>
+
+            <!-- /.col-lg-6 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
 <script src = "/js/jquery.js"></script>
 <script src = "/js/bootstrap.min.js"></script>
 </body>

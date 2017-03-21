@@ -12,13 +12,17 @@
 */
 
 
-
-
 /*
  * 詞彙
  */
 //查詢詞彙
-Route::get('/searchword', 'DictionaryController@index');
+Route::get('/searchword', 'DictionaryController@AllLangSystem');
+
+Route::post('languageSystemSearchWord', 'DictionaryController@languageSystemSearchWord');
+Route::post('blurrySearchWord', 'DictionaryController@blurrySearchWord');
+
+//Route::post('/searchword', 'DictionaryController@AllLangSystem');
+
 //依照語系查詢詞彙
 //Route::get('/testword', 'DictionaryController@languageSystemSearchWord');
 //模糊查詢詞彙
@@ -32,10 +36,10 @@ Route::get('/', function () {
 
 
 //新增字彙
-//Route::get('/addword', function () {
-//
-//    return view('Addword');
-//});
+Route::get('/addword', function () {
+
+    return view('Addword');
+});
 
 ////新增字彙
 //Route::get('/searchword', function () {
