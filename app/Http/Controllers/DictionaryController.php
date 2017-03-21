@@ -11,6 +11,7 @@ class DictionaryController extends Controller
 {
     public function AllLangSystem()
     {
+
         //所有語系
         $langSystem_model = new Language;
         $ret = $langSystem_model->AllLangSystem();
@@ -30,11 +31,11 @@ class DictionaryController extends Controller
         }
         else
         {
-            $dictionary_model = new Dictionary;
             $ret = $dictionary_model->languageSystemSearchWord($lang);
         }
-        return view('/testWord', ['words' => $ret]);
+        return view('/testWord', ['words' => $ret ]);
     }
+
 
     public function blurrySearchWord(Request $request)
     {
@@ -42,7 +43,7 @@ class DictionaryController extends Controller
         $word = $request->get('word');
         $dictionary_model = new Dictionary;
         $ret = $dictionary_model->blurrySearchWord($word);
-        return view( '/testWord',  ['words' => $ret]);
+        return view( '/testWord',  [ 'words' => $ret ]);
     }
 
 }
