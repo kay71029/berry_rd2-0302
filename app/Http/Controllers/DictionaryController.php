@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Dictionary;
-use App\Language;
 use DB;
+use App\Language;
+use App\Dictionary;
+
 class DictionaryController extends Controller
 {
+    public function index()
+    {
+        //語系選擇
+        $langSystem_model = new Language;
+        $ret = $langSystem_model->AllLangSystem();
+        return view('/SearchWord', ['ret_lang' => $ret]);
+    }
 
     //不分語系查詢字彙字彙
     public function searchAllWord()
@@ -17,10 +25,7 @@ class DictionaryController extends Controller
 
         $langSystem_model = new Language;
         $ret_lang = $langSystem_model->AllLangSystem( );
-
-
-
-        return view( '/searchword',  ['words' => $ret_word,'langs' => $ret_lang]);
+        return view( '/SearchWord',  ['words' => $ret_word]);
 
     }
 

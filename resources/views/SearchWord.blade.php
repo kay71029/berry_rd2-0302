@@ -29,7 +29,7 @@
         </div>
     </div>
 </nav>
-<div class = "panel panel-default">
+<div class = "panel panel-success">
     <div class = "panel-heading">
         查詢字彙
     </div>
@@ -41,48 +41,47 @@
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="panel panel-default" style="height:200px">
+                        <div class="panel panel-info" style="height:200px">
                             <div class="panel-heading">
                                 語系查詢
                             </div>
-                            <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <h4>語系選擇</h4>
                                 <form role="form">
                                     <div class="form-group">
-                                        @foreach($langs as $key => $lang)
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">{{$lang->lang}}
-                                            </label>
-                                        @endforeach
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox">ALL
+                                        </label>
+                                     @foreach($ret_lang as $key => $lang)
+                                          <label class="checkbox-inline">
+                                              <input type="checkbox">{{$lang->lang}}
+                                          </label>
+                                      @endforeach
                                     </div>
                                     <button type="submit" class="btn btn-default">查詢</button>
+                                    <button type="reset" class="btn btn-default">重置</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="panel panel-default" style="height:200px" >
+                        <div class="panel panel-warning " style="height:200px" >
                             <div class="panel-heading">
-                                模糊查詢輸入查詢
+                                模糊查詢
                             </div>
                             <div class="panel-body">
-                                <h4>輸入查詢</h4>
                                 <form role="form">
                                     <div class="form-group">
-                                        <textarea class="form-control" rows='1'></textarea>
+                                        <textarea class="form-control" rows='3'></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-default">查詢</button>
                                     <button type="reset" class="btn btn-default">重置</button>
+                                </form>
                             </div>
                         </div>
-                        <!-- /.panel -->
                     </div>
-                    <!-- /.col-lg-6 -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class = "panel panel-default">
                     <div class = "panel-heading">
@@ -93,7 +92,8 @@
                         <thead>
                         <tr>
                             <th>編號</th>
-                            <th>Words</th>
+                            <th>語系</th>
+                            <th>詞彙</th>
                         </tr>
                         </thead>
                         {{--@foreach($words as $key => $word)
