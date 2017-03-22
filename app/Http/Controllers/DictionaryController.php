@@ -9,41 +9,62 @@ use App\Dictionary;
 
 class DictionaryController extends Controller
 {
-    public function AllLangSystem()
+    public function QueryWords(Request $request)
     {
 
-        //所有語系
+        $lang = $request->get('lang');
+        $word = $request->get('word');
+
         $langSystem_model = new Language;
         $ret = $langSystem_model->AllLangSystem();
-        return view('/SearchWord', ['ret_lang' => $ret]);
+
+        $dictionary_model = new Dictionary;
+
+        if ($lang == "ALL") {
+            $ret_word = $dictionary_model->searchAllWord();
+        }
+        if ($lang != "ALL") {
+            $ret_word = $dictionary_model->languageSystemSearchWord($lang);
+        }
+        if ($word != null) {
+            $ret_word = $dictionary_model->blurrySearchWord($word);
+        }
+        return view('/SearchWord', ['ret_lang' => $ret, 'words' => $ret_word]);
     }
 
-    public function languageSystemSearchWord(Request $request)
+
+
+    public function CreateWords()
     {
-        //依照分語系查詢字彙
+        $langSystem_model = new Language;
+        $ret = $langSystem_model->AllLangSystem();
+        unset($ret[0]);
+        return view('/addWord', ['ret_lang' => $ret]);
+    }
+
+
+    public function InsertWords(Request $request)
+    {
+        //新增詞彙
+        date_default_timezone_set('Asia/Taipei');
         $lang = $request->get('lang');
-        $all = $request->get('all');
+        $word_insert = $request->get('word_insert');
+        $founder = $request->get('founder');
+        $time = Date("Y-m-d H:i:s");
+
+
+        $array = array('lang' => $lang, 'word' => $word_insert, 'founder' => $founder, 'created_at' => $time, 'updated_at' => $time);
         $dictionary_model = new Dictionary;
+        $dictionary_model->AddWoed($array);
 
-        if ($all == "all")
-        {
-            $ret = $dictionary_model->searchAllWord();
-        }
-        else
-        {
-            $ret = $dictionary_model->languageSystemSearchWord($lang);
-        }
-        return view('/testWord', ['words' => $ret ]);
+        //刪除重複的詞彙
+
+
+        //回到顯示的畫面
+        $langSystem_model = new Language;
+        $ret = $langSystem_model->AllLangSystem();
+        unset($ret[0]);
+        return view('/addWord', ['ret_lang' => $ret]);
+
     }
-
-
-    public function blurrySearchWord(Request $request)
-    {
-        //模糊查詢字彙字彙
-        $word = $request->get('word');
-        $dictionary_model = new Dictionary;
-        $ret = $dictionary_model->blurrySearchWord($word);
-        return view( '/testWord',  [ 'words' => $ret ]);
-    }
-
 }

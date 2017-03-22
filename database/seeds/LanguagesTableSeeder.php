@@ -15,6 +15,12 @@ class LanguagesTableSeeder extends Seeder
         DB::table('languages')->truncate();
 
         DB::table('languages')->insert([
+            'lang' => 'ALL',
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+
+        DB::table('languages')->insert([
             'lang' => 'zh_CN',
             'created_at' => new DateTime,
             'updated_at' => new DateTime,

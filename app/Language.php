@@ -15,6 +15,8 @@ class Language extends Model
         return $ret;
     }
 
+
+
     //查詢語系
     public function LangSystem($lang)
     {

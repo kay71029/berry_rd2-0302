@@ -8,6 +8,7 @@
     <tr>
         <td>{{$key+1}}</td>
         <td>{{$word->word}}</td>
+        <td>{{$word->lang}}</td>
     </tr>
 @endforeach
 </body>

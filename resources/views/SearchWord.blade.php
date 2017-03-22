@@ -47,17 +47,13 @@
                             </div>
                             <div class="panel-body">
                                 <h4>語系選擇</h4>
-                                <form role="form" action="languageSystemSearchWord" method="POST">
-                                    {{ csrf_field() }}
+                                <form role="form" action="" method="GET">
                                     <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="all"value="all">ALL
+                                        @foreach($ret_lang as $key => $lang)
+                                        <label class="radio-inline">
+                                            <input type="radio" name="lang" id="optionsRadiosInline1" value="{{$lang->lang}}" >{{$lang->lang}}
                                         </label>
-                                     @foreach($ret_lang as $key => $lang)
-                                          <label class="checkbox-inline">
-                                              <input type="checkbox" name="lang" value="{{$lang->lang}}">{{$lang->lang}}
-                                          </label>
-                                      @endforeach
+                                        @endforeach
                                     </div>
                                     <button type="submit" class="btn btn-default">查詢</button>
                                     <button type="reset" class="btn btn-default">重置</button>
@@ -71,7 +67,7 @@
                                 模糊查詢
                             </div>
                             <div class="panel-body">
-                                <form role="form" action="blurrySearchWord" method="POST">
+                                <form role="form" action="" method="GET">
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <textarea class="form-control" rows='3' name="word" ></textarea>
@@ -98,18 +94,18 @@
                             <th>詞彙</th>
                         </tr>
                         </thead>
-                        {{--
+
                         @foreach($words as $key => $word)
                         <tr>
                             <td>{{$key+1}}</td>
+                            <td>{{$word->lang}}</td>
                             <td>{{$word->word}}</td>
                         </tr>
                         @endforeach
---}}
                         </tbody>
                     </table>
                 </div>
-        </div>
+                </div>
             </div>
 </div>
 <script src = "/js/jquery.js"></script>

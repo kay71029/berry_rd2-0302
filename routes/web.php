@@ -1,45 +1,27 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 
 /*
  * 詞彙
  */
 //查詢詞彙
-Route::get('/searchword', 'DictionaryController@AllLangSystem');
-
-Route::post('languageSystemSearchWord', 'DictionaryController@languageSystemSearchWord');
-Route::post('blurrySearchWord', 'DictionaryController@blurrySearchWord');
-
-//Route::post('/searchword', 'DictionaryController@AllLangSystem');
-
-//依照語系查詢詞彙
-//Route::get('/testword', 'DictionaryController@languageSystemSearchWord');
-//模糊查詢詞彙
-//Route::get('/testword', 'DictionaryController@index');
+Route::GET('searchword', 'DictionaryController@QueryWords');
+Route::GET('addword', 'DictionaryController@CreateWords');
+Route::GET('InsertWords', 'DictionaryController@InsertWords');
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 
 //新增字彙
-Route::get('/addword', function () {
-
-    return view('Addword');
-});
+//Route::get('/addword', function () {
+//
+//    return view('Addword');
+//});
 
 ////新增字彙
 //Route::get('/searchword', function () {
