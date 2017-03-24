@@ -9,6 +9,11 @@
 Route::GET('searchword', 'DictionaryController@QueryWords');
 //增加詞彙
 Route::GET('addword', 'DictionaryController@CreateWords');
+//刪除詞彙
+Route::GET('deleteword', 'DictionaryController@DeleteWords');
+
+Route::get('searchword/{id}', 'DictionaryController@ShowWords');
+
 //統計字彙
 Route::get('/sumword', function () {
     return view('SumWord');

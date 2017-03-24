@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DB;
 use App\Language;
 use App\Dictionary;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Paginator;
 
 class DictionaryController extends Controller
 {
+
     public function QueryWords(Request $request)
     {
 
@@ -17,11 +19,11 @@ class DictionaryController extends Controller
 
         $langSystem_model = new Language;
         $ret = $langSystem_model->AllLangSystem();
-
         $dictionary_model = new Dictionary;
 
         if ($lang == "ALL") {
             $ret_word = $dictionary_model->searchAllWord();
+
         }
         if ($lang != "ALL") {
             $ret_word = $dictionary_model->languageSystemSearchWord($lang);
@@ -31,7 +33,6 @@ class DictionaryController extends Controller
         }
         return view('/SearchWord', ['ret_lang' => $ret, 'words' => $ret_word]);
     }
-
 
 
     public function CreateWords()
@@ -66,5 +67,21 @@ class DictionaryController extends Controller
         unset($ret[0]);
         return view('/addWord', ['ret_lang' => $ret]);
 
+    }
+
+
+
+    public function edit($id)
+    {
+
+
+    }
+
+    public function DeleteWords(Request $request )
+    {
+        $id = $request->get('id');
+        $dictionary_model = new Dictionary;
+        $dictionary_model->DeleteWord($id);
+        return redirect('searchword');
     }
 }

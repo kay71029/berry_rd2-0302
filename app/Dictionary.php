@@ -3,12 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Paginator;
 class Dictionary extends Model
 {
     //不分語系查詢字彙字彙
     public function searchAllWord()
     {
-        $ret = Dictionary::select( 'word' ,'lang' )
+        $ret = Dictionary::select( 'word' ,'lang' ,'id')
             -> orderBy( 'word', 'ASC' )
             -> get();
         return $ret;
@@ -17,7 +18,7 @@ class Dictionary extends Model
     //依照分語系查詢字彙
     public function languageSystemSearchWord( $lang )
     {
-        $ret = Dictionary::select( 'word' ,'lang' )
+        $ret = Dictionary::select( 'word' ,'lang' ,'id')
             -> where( 'lang','=', $lang )
             -> orderBy( 'word', 'ASC' )
             -> get();
@@ -27,7 +28,7 @@ class Dictionary extends Model
     //模糊查詢字彙字彙
     public function blurrySearchWord( $word )
     {
-        $array = Dictionary::select( 'word', 'lang' )
+        $array = Dictionary::select( 'word', 'lang','id')
             -> where( 'word', 'LIKE', '%'.$word.'%' )
             -> orderBy( 'word', 'ASC' )
             -> get();
@@ -43,11 +44,28 @@ class Dictionary extends Model
         return $ret;
     }
 
-
     //新增詞彙
-    public function AddWoed($array)
+    public function AddWod($array)
     {
         Dictionary::insert($array);
     }
+
+    //刪除詞彙
+    public function DeleteWord($id)
+    {
+        $ret = Dictionary::find($id);
+        $ret->delete();
+
+        //Dictionary::delete($id);
+        //-> where( 'id','=', $id )
+        //-> delete();
+    }
+
+    //詞彙
+    public function UpdateWord($array)
+    {
+
+    }
+
 
 }

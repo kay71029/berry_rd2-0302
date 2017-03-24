@@ -73,15 +73,22 @@
                                     <th>刪除</th>
                                 </tr>
                                 </thead>
-                                    @foreach($words as $key => $word)
+                                <tbody>
+                                    @foreach( $words as $key => $word )
                                     <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$word->lang}}</td>
-                                        <td>{{$word->word}}</td>
-                                        <td><button type= "button" name="edit_button" value="0" class="btn btn-default">修改</button></td>
-                                        <td><button type= "button" name="edit_button" value="0" class="btn btn-default">刪除</button></td>
+                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $word->lang }}</td>
+                                        <td>{{ $word->word }}</td>
+                                        <td>
+                                            {{--<a href= "?id={{$word->id}}"class="btn btn-default navbar-btn" >修改</a>--}}
+                                        </td>
+                                        <td>
+                                            {{--<a href= "?id={{$word->id}}"class="btn btn-default navbar-btn" >刪除</a>--}}
+                                            <a href="/deleteword?id={{$word->id}}" class="btn btn-default navbar-btn">刪除</a>
+                                        </td>
                                     </tr>
                                     @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
