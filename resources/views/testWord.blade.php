@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.layout')
 
-<head>
-</head>
-<body>
-@foreach($words as $key => $word)
-    <tr>
-        <td>{{$key+1}}</td>
-        <td>{{$word->word}}</td>
-        <td>{{$word->lang}}</td>
-    </tr>
-@endforeach
-</body>
-</html>
+@section('sidebar')
+
+@endsection
+
+@section('content')
+
+@endsection

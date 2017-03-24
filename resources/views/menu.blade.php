@@ -13,8 +13,6 @@
             <ul class = "nav navbar-nav">
                 <li class = "active"><a href = "addword">新增字彙<span class = "sr-only">(current)</span></a></li>
                 <li class = "active"><a href = "searchword">查詢字彙<span class = "sr-only">(current)</span></a></li>
-                <li class = "active"><a href = "modifyword">修改字彙<span class = "sr-only">(current)</span></a></li>
-                <li class = "active"><a href = "deleteword">刪除字彙<span class = "sr-only">(current)</span></a></li>
                 <li class = "active"><a href = "sumword">字彙統計<span class = "sr-only">(current)</span></a></li>
             </ul>
         </div>
