@@ -40,13 +40,21 @@ class Dictionary extends Model
     {
         $ret = Dictionary::select( 'word' )
             -> where( 'word','=', $word )
-            -> get();
-        return $ret;
+            -> count();
+
+        if ($ret == 0){
+            return true;
+        }
+        if ($ret > 0){
+            return false;
+        }
+
     }
 
     //新增詞彙
-    public function AddWod($array)
+    public function AddWord($array)
     {
+       //dd($array);
         Dictionary::insert($array);
     }
 
@@ -56,9 +64,6 @@ class Dictionary extends Model
         $ret = Dictionary::find($id);
         $ret->delete();
 
-        //Dictionary::delete($id);
-        //-> where( 'id','=', $id )
-        //-> delete();
     }
 
     //詞彙

@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="panel-body">
                             <h4>語系選擇</h4>
-                            <form role="form" action="InsertWords" method="GET">
+                            <form role="form" action="insertwords" method="GET">
                                 <div class="form-group">
                                     @foreach($ret_lang as $key => $lang)
                                         <label class="radio-inline">

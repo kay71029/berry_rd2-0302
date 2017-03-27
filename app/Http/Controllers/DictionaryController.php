@@ -53,14 +53,17 @@ class DictionaryController extends Controller
         $founder = $request->get('founder');
         $time = Date("Y-m-d H:i:s");
 
-
-        $array = array('lang' => $lang, 'word' => $word_insert, 'founder' => $founder, 'created_at' => $time, 'updated_at' => $time);
         $dictionary_model = new Dictionary;
-        $dictionary_model->AddWoed($array);
+        $ret_word = $dictionary_model->checkWord($word_insert);
 
-        //刪除重複的詞彙
-
-
+        if ( $ret_word == true) {
+            $array = array('lang' => $lang, 'word' => $word_insert, 'founder' => $founder, 'created_at' => $time, 'updated_at' => $time);
+            $dictionary_model = new Dictionary;
+            $dictionary_model->AddWord($array);
+        }
+        if ( $ret_word == false ) {
+            echo "已存在字典中";
+        }
         //回到顯示的畫面
         $langSystem_model = new Language;
         $ret = $langSystem_model->AllLangSystem();

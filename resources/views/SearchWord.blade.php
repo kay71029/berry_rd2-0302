@@ -80,7 +80,7 @@
                                         <td>{{ $word->lang }}</td>
                                         <td>{{ $word->word }}</td>
                                         <td>
-                                            {{--<a href= "?id={{$word->id}}"class="btn btn-default navbar-btn" >修改</a>--}}
+                                            <a href= "?id={{$word->id}}"class="btn btn-default navbar-btn" >修改</a>
                                         </td>
                                         <td>
                                             {{--<a href= "?id={{$word->id}}"class="btn btn-default navbar-btn" >刪除</a>--}}

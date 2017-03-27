@@ -14,6 +14,11 @@ Route::GET('deleteword', 'DictionaryController@DeleteWords');
 
 Route::get('searchword/{id}', 'DictionaryController@ShowWords');
 
+//增加詞彙
+Route::GET('addword', 'DictionaryController@CreateWords');
+
+Route::GET('insertwords', 'DictionaryController@InsertWords');
+
 //統計字彙
 Route::get('/sumword', function () {
     return view('SumWord');
