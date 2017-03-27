@@ -43,7 +43,6 @@ class DictionaryController extends Controller
         return view('/addWord', ['ret_lang' => $ret]);
     }
 
-
     public function InsertWords(Request $request)
     {
         //新增詞彙
@@ -57,13 +56,15 @@ class DictionaryController extends Controller
         $ret_word = $dictionary_model->checkWord($word_insert);
 
         if ( $ret_word == true) {
-            $array = array('lang' => $lang, 'word' => $word_insert, 'founder' => $founder, 'created_at' => $time, 'updated_at' => $time);
+            $array = array('lang' => $lang, 'word' => $word_insert, 'founder' => $founder, 'created_at' => $time,
+                'updated_at' => $time);
             $dictionary_model = new Dictionary;
             $dictionary_model->AddWord($array);
         }
         if ( $ret_word == false ) {
             echo "已存在字典中";
         }
+
         //回到顯示的畫面
         $langSystem_model = new Language;
         $ret = $langSystem_model->AllLangSystem();
@@ -72,11 +73,12 @@ class DictionaryController extends Controller
 
     }
 
-
-
-    public function edit($id)
+    public function ModifyWords(Request $request)
     {
-
+        $word = $request->get('update_word');
+        $lang = $request->get('lang');
+        $id = $request->get('id');
+        var_dump($word, $lang,$id);
 
     }
 

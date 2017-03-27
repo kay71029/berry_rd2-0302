@@ -80,7 +80,8 @@
                                         <td>{{ $word->lang }}</td>
                                         <td>{{ $word->word }}</td>
                                         <td>
-                                            <a href= "?id={{$word->id}}"class="btn btn-default navbar-btn" >修改</a>
+                                            {{--<a href="/modifyeword?id={{$word->id}}" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">修改</a>--}}
+                                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">修改</button>
                                         </td>
                                         <td>
                                             {{--<a href= "?id={{$word->id}}"class="btn btn-default navbar-btn" >刪除</a>--}}
@@ -96,4 +97,40 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">修改詞彙</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="modifyword" method="GET">
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">語系:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="lang" value="lang">
+                            lang
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">詞彙:</label>
+                                <textarea class="form-control" id="message-text" name="update_word" value="update_word"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                {{--<input type="hidden" value="{{$word->id}}" name="id"/>--}}
+                                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                                <button type="submit" class="btn btn-primary">送出</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var recipient = button.data('whatever')
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+        })
+    </script>
 @endsection
