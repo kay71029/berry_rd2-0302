@@ -66,7 +66,7 @@ class Dictionary extends Model
 
     }
 
-    //詞彙
+    //修改詞彙
     public function UpdateWord($array)
     {
 

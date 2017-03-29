@@ -58,7 +58,7 @@ class DictionaryController extends Controller
             $dictionary_model = new Dictionary;
             $ret_word = $dictionary_model->checkWord($word_value);
 
-            if ( $ret_word == true)
+            if ( $ret_word == true )
             {
                 $array = array('lang' => $lang, 'word' => $word_value, 'founder' => $founder, 'created_at' => $time,
                    'updated_at' => $time);
@@ -78,6 +78,11 @@ class DictionaryController extends Controller
         $ret = $langSystem_model->AllLangSystem();
         unset($ret[0]);
         return view('/addWord', ['ret_lang' => $ret]);
+
+    }
+
+    public function insert_words_of_file(Request $request)
+    {
 
     }
 
