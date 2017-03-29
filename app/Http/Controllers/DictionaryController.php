@@ -34,7 +34,6 @@ class DictionaryController extends Controller
         return view('/SearchWord', ['ret_lang' => $ret, 'words' => $ret_word]);
     }
 
-
     public function CreateWords()
     {
         $langSystem_model = new Language;
@@ -47,22 +46,31 @@ class DictionaryController extends Controller
     {
         //新增詞彙
         date_default_timezone_set('Asia/Taipei');
-        $lang = $request->get('lang');
-        $word_insert = $request->get('word_insert');
         $founder = $request->get('founder');
         $time = Date("Y-m-d H:i:s");
+        $lang = $request->get('lang');
+        $word_insert = $request->get('word_insert');
+        $word_insert = preg_replace('/\s+/', '', $word_insert);
+        $word = explode(",", $word_insert);
 
-        $dictionary_model = new Dictionary;
-        $ret_word = $dictionary_model->checkWord($word_insert);
-
-        if ( $ret_word == true) {
-            $array = array('lang' => $lang, 'word' => $word_insert, 'founder' => $founder, 'created_at' => $time,
-                'updated_at' => $time);
+        foreach($word as $key => $word_value)
+        {
             $dictionary_model = new Dictionary;
-            $dictionary_model->AddWord($array);
-        }
-        if ( $ret_word == false ) {
-            echo "已存在字典中";
+            $ret_word = $dictionary_model->checkWord($word_value);
+
+            if ( $ret_word == true)
+            {
+                $array = array('lang' => $lang, 'word' => $word_value, 'founder' => $founder, 'created_at' => $time,
+                   'updated_at' => $time);
+
+                $dictionary_model = new Dictionary;
+                $dictionary_model->AddWord($array);
+            }
+
+            if ( $ret_word == false )
+            {
+                echo $word_value ."已存在字典中";
+            }
         }
 
         //回到顯示的畫面
