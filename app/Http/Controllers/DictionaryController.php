@@ -30,7 +30,7 @@ class DictionaryController extends Controller
                 $massage = '查無資料';
             }
 
-            if( $count > 1 )
+            if( $count >= 1 )
             {
                 $massage = '所有語系查詢-總計'.$count.'資料' ;
             }
@@ -46,7 +46,7 @@ class DictionaryController extends Controller
                 $massage = '查無資料';
             }
 
-            if( $count > 1 )
+            if( $count >= 1 )
             {
                 $massage = $lang.'查詢-總計'.$count.'資料' ;
             }
@@ -62,7 +62,7 @@ class DictionaryController extends Controller
                 $massage = '查無資料';
             }
 
-            if( $count > 1 )
+            if( $count >= 1 )
             {
                 $massage = '模糊查詢-總計'.$count.'資料' ;
             }
