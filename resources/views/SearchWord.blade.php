@@ -88,11 +88,9 @@
                                         <td>{{ $word->lang }}</td>
                                         <td>{{ $word->word }}</td>
                                         <td>
-                                            {{--<a href="/modifyeword?id={{$word->id}}" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">修改</a>--}}
-                                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">修改</button>
+                                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever1={{ $word->id }} data-whatever2={{ $word->lang }} data-whatever3={{ $word->word }}>修改</button>
                                         </td>
                                         <td>
-                                            {{--<a href= "?id={{$word->id}}"class="btn btn-default navbar-btn" >刪除</a>--}}
                                             <a href="/deleteword?id={{$word->id}}" class="btn btn-default navbar-btn">刪除</a>
                                         </td>
                                     </tr>
@@ -116,29 +114,38 @@
                     <form role="form" action="modifyword" method="GET">
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">語系:</label>
-                            <input type="text" class="form-control" id="recipient-name" name="lang" value="lang">
+                            <input type="text" class="form-control" id="lang" name="lang" value="lang" required>
                             lang
                             <div class="form-group">
                                 <label for="message-text" class="control-label">詞彙:</label>
-                                <textarea class="form-control" id="message-text" name="update_word" value="update_word"></textarea>
+                                <textarea class="form-control" id="word" name="update_word" value="update_word" required></textarea>
                             </div>
                             <div class="modal-footer">
-                                {{--<input type="hidden" value="{{$word->id}}" name="id"/>--}}
+                                @if (!empty ($word))
+                                <input type="hidden" id="id" value="{{$word->id}}" name="id">
+                                @endif
                                 <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
                                 <button type="submit" class="btn btn-primary">送出</button>
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var recipient = button.data('whatever')
-            var modal = $(this)
-            modal.find('.modal-title').text('New message to ' + recipient)
-            modal.find('.modal-body input').val(recipient)
-        })
+        $(document).ready(function () {
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var recipient = button.data('whatever1')
+                var recipient2 = button.data('whatever2')
+                var recipient3 = button.data('whatever3')
+                var modal = $(this)
+                modal.find('#id').val(recipient)
+                modal.find('#lang').val(recipient2)
+                modal.find('#word').val(recipient3)
+            })
+        });
     </script>
 @endsection

@@ -54,7 +54,6 @@ class Dictionary extends Model
     //新增詞彙
     public function AddWord($array)
     {
-       //dd($array);
         Dictionary::insert($array);
     }
 
@@ -63,14 +62,16 @@ class Dictionary extends Model
     {
         $ret = Dictionary::find($id);
         $ret->delete();
-
     }
 
     //修改詞彙
-    public function UpdateWord($array)
+    public function UpdateWord($id,$lang,$word,$time)
     {
-
+        $ret = Dictionary::find($id);
+        $ret->lang = $lang;
+        $ret->word = $word;
+        $ret->updated_at = $time;
+        $ret->save();
     }
-
 
 }

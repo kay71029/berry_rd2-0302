@@ -127,10 +127,13 @@ class DictionaryController extends Controller
 
     public function ModifyWords(Request $request)
     {
+        $time = Date("Y-m-d H:i:s");
         $word = $request->get('update_word');
         $lang = $request->get('lang');
         $id = $request->get('id');
-        var_dump($word, $lang,$id);
+        $dictionary_model = new Dictionary;
+        $dictionary_model->UpdateWord($id,$lang,$word,$time);
+        return redirect('searchword');
 
     }
 
@@ -142,4 +145,5 @@ class DictionaryController extends Controller
         $request->session()->flash('alert-danger', '刪除成功');
         return redirect('searchword');
     }
+
 }
