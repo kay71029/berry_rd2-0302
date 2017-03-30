@@ -58,7 +58,7 @@ class DictionaryController extends Controller
             $dictionary_model = new Dictionary;
             $ret_word = $dictionary_model->checkWord($word_value);
 
-            if ( $ret_word == true )
+            if ( $ret_word == true && $word_value != null)
             {
                 $array = array('lang' => $lang, 'word' => $word_value, 'founder' => $founder, 'created_at' => $time,
                    'updated_at' => $time);
@@ -100,6 +100,7 @@ class DictionaryController extends Controller
         $id = $request->get('id');
         $dictionary_model = new Dictionary;
         $dictionary_model->DeleteWord($id);
+        $request->session()->flash('alert-danger', '刪除成功');
         return redirect('searchword');
     }
 }

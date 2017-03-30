@@ -42,22 +42,22 @@
                                 </form>
                             </div>
                         </div>
-                        {{--<div class="panel-body">--}}
-                            {{--<div class="panel panel-warning " style=" " >--}}
-                                {{--<div class="panel-heading">--}}
-                                    {{--檔案新增--}}
-                                {{--</div>--}}
-                                {{--<div class="panel-body">--}}
-                                    {{--<form action="" method="post" enctype="multipart/form-data">--}}
-                                        {{--<p>檔案內容：建立者,語系,詞彙 => user1,zh_TW,abc</p>--}}
-                                        {{--<input type="hidden" name="MAX_FILE_SIZE" value="2097152">--}}
-                                        {{--<input type="file" name="word_File" accept="text" style="display: block;margin-bottom: 20px;">--}}
-                                        {{--<input type="submit" value="上傳檔案">--}}
-                                    {{--</form>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                        <div class="panel-body">
+                            <div class="panel panel-warning " style=" " >
+                                <div class="panel-heading">
+                                    檔案新增
+                                </div>
+                                <div class="panel-body">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        <p>檔案內容：建立者,語系,詞彙 => user1,zh_TW,abc</p>
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
+                                        <input type="file" name="word_File" accept="text" style="display: block;margin-bottom: 20px;">
+                                        <input type="submit" value="上傳檔案">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {{--<div class="panel-body">--}}
                     {{--<div class = "panel panel-default">--}}
