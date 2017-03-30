@@ -23,14 +23,53 @@ class DictionaryController extends Controller
 
         if ($lang == "ALL") {
             $ret_word = $dictionary_model->searchAllWord();
+            $count = count($ret_word);
+
+            if ( $count == 0 )
+            {
+                $massage = '查無資料';
+            }
+
+            if( $count > 1 )
+            {
+                $massage = '所有語系查詢-總計'.$count.'資料' ;
+            }
 
         }
+
         if ($lang != "ALL") {
             $ret_word = $dictionary_model->languageSystemSearchWord($lang);
+            $count = count($ret_word);
+
+            if ( $count == 0 )
+            {
+                $massage = '查無資料';
+            }
+
+            if( $count > 1 )
+            {
+                $massage = $lang.'查詢-總計'.$count.'資料' ;
+            }
         }
-        if ($word != null) {
+
+        if ($word != null)
+        {
             $ret_word = $dictionary_model->blurrySearchWord($word);
+            $count = count($ret_word);
+
+            if ( $count == 0 )
+            {
+                $massage = '查無資料';
+            }
+
+            if( $count > 1 )
+            {
+                $massage = '模糊查詢-總計'.$count.'資料' ;
+            }
+
         }
+
+        $request->session()->flash('alert-danger', $massage);
         return view('/SearchWord', ['ret_lang' => $ret, 'words' => $ret_word]);
     }
 
