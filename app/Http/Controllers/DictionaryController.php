@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Language;
 use App\Dictionary;
+use App\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Paginator;
 
@@ -120,13 +121,9 @@ class DictionaryController extends Controller
 
     }
 
-    public function insert_words_of_file(Request $request)
-    {
-
-    }
-
     public function ModifyWords(Request $request)
     {
+        date_default_timezone_set('Asia/Taipei');
         $time = Date("Y-m-d H:i:s");
         $word = $request->get('update_word');
         $lang = $request->get('lang');
@@ -155,6 +152,76 @@ class DictionaryController extends Controller
         $dictionary_model->DeleteWord($id);
         $request->session()->flash('alert-danger', '刪除成功');
         return redirect('searchword');
+    }
+
+    public function FilesUpdate(Request $request )
+    {
+        $founder = $request->get('founder');
+        $lang = $request->get('lang');
+        //取得檔案暫存路徑
+        $file = $request->file('word_File');
+        //取得檔案內容
+        $content = file_get_contents($file);
+        $word_insert = preg_replace('/\s+/', '', $content);
+        $word_insert = explode(",", $word_insert);
+
+        //3個一組
+        $word_count = count($word_insert);
+        $word_count = $word_count/3;
+        for($i = 0; $i < $word_count ; $i++)
+        {
+            $word_group[] = array_slice($word_insert, $i*3 ,3);
+        }
+
+        foreach($word_group as $val_row)
+        {
+
+            if( $val_row[0] == null )
+            {
+                break;
+            }
+
+            if( $val_row[1] == null )
+            {
+                break;
+            }
+
+            if( $val_row[2] == null )
+            {
+                break;
+            }
+            echo $val_row[2];
+//            foreach ($val_row as $val_word)
+//            {
+////                print_r($val_row[0]);
+////                exit;
+//                echo " ".$val_word[1]."</br>" ;
+//            }
+        }
+//        exit;
+//        //取得原始檔案名稱
+//        $fileName = $file->getClientOriginalName();
+//        //取得檔案儲存預設路徑
+//        $disk = config('filesystems.disks.public.root');
+//        //儲存檔案並取得路徑
+//        $path = $disk.'/'.$file->storeAs('test', $fileName, 'public');
+//        date_default_timezone_set('Asia/Taipei');
+//        $time = Date("Y-m-d H:i:s");
+//        $array = array('filename' => $fileName, 'path' => $path, 'created_at' => $time, 'updated_at' => $time);
+//        //將檔案路徑存入資料庫
+//        $File_model = new File;
+//        $ret = $File_model->insertFileInfo($array);
+//
+////            var_dump($ret);
+////            exit;
+//        //取得檔案內容
+//        // $content = file_get_contents($file);
+//        if (!$ret) {
+//            throw new \Exception('操作失敗');
+//        }
+
+           // return redirect()->route('test');
+
     }
 
 }

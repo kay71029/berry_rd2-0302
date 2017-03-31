@@ -14,9 +14,12 @@ Route::GET('deleteword', 'DictionaryController@DeleteWords');
 //增加詞彙
 Route::GET('addword', 'DictionaryController@CreateWords');
 Route::GET('insertwords', 'DictionaryController@InsertWords');
-Route::POST('insert_words_of_file', 'DictionaryController@insert_words_of_file');
+
+Route::POST('FilesUpdate', 'DictionaryController@FilesUpdate');
 //修改詞彙
 Route::GET('modifyword', 'DictionaryController@ModifyWords');
+
+
 
 //統計字彙
 Route::get('/sumword', function () {
