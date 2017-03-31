@@ -74,4 +74,21 @@ class Dictionary extends Model
         $ret->save();
     }
 
+    //比對查詢id word
+    public function ModifyWord($word,$id)
+    {
+        $ret = Dictionary::select( 'word' )
+            -> where( 'word','=', $word )
+            -> where( 'id','!=', $id )
+            -> count();
+
+        if ($ret == 0){
+            return true;
+        }
+        if ($ret > 0){
+            return false;
+        }
+
+    }
+
 }

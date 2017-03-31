@@ -132,9 +132,20 @@ class DictionaryController extends Controller
         $lang = $request->get('lang');
         $id = $request->get('id');
         $dictionary_model = new Dictionary;
-        $dictionary_model->UpdateWord($id,$lang,$word,$time);
-        return redirect('searchword');
 
+        $ret_word = $dictionary_model->ModifyWord($word,$id);
+
+        if ( $ret_word == true && $word != null)
+        {
+            $dictionary_model->UpdateWord($id,$lang,$word,$time);
+        }
+
+        if ( $ret_word == false )
+        {
+            echo $word ."已存在字典中";
+        }
+
+        return redirect('searchword');
     }
 
     public function DeleteWords(Request $request )
