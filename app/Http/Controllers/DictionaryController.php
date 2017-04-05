@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Excel;
 use App\Language;
 use App\Dictionary;
 use App\File;
@@ -222,6 +223,80 @@ class DictionaryController extends Controller
 
            // return redirect()->route('test');
 
+    }
+
+
+    public function downloadExcel(Request $request, $type)
+    {
+        $data = Dictionary::get()->toArray();
+        return Excel::create('word_update', function($excel) use ($data)
+        {
+            $excel->sheet('mySheet', function($sheet) use ($data)
+            {
+                $sheet->fromArray($data);
+            });
+        })->download($type);
+    }
+
+    public function importExcel(Request $request)
+    {
+
+        date_default_timezone_set('Asia/Taipei');
+        $time = Date("Y-m-d H:i:s");
+
+        if($request->hasFile('excel_file'))
+        {
+            $path = $request->file('excel_file')->getRealPath();
+            $data = Excel::load($path, function($reader) {})->get();
+
+            if(!empty($data) && $data->count())
+            {
+
+
+                //ToDo 判斷重複的資料
+                foreach ($data->toArray() as $key => $value) {
+                    if(!empty($value))
+                    {
+
+                        foreach ($value as $v)
+                        {
+                            $dictionary_model = new Dictionary;
+                            $ret_word = $dictionary_model->checkWord($v['word']);
+                            $lang_model = new Language();
+                            $lang_system = $lang_model->checkLang( $v['lang']);
+
+                            if ($lang_system == true && $ret_word == true && $v['founder'] != null)
+                            {
+
+                                array_push($insert, ['lang' => $v['lang'], 'word' => $v['word'], 'founder' => $v['founder'],
+                                    'created_at' => $time, 'updated_at' => $time]);
+
+//                                $insert[] = ['lang' => $v['lang'], 'word' => $v['word'], 'founder' => $v['founder'],
+//                                    'created_at' => $time, 'updated_at' => $time];
+                            }
+
+                            if ($lang_system != true || $ret_word != true  || $v['founder'] == null)
+                            {
+                                array_push($insert_fall, ['lang' => $v['lang'], 'word' => $v['word'], 'founder' => $v['founder'],
+                                    'created_at' => $time, 'updated_at' => $time]);
+//                                $insert_fall[] = ['lang' => $v['lang'], 'word' => $v['word'], 'founder' => $v['founder'],
+//                                    'created_at' => $time, 'updated_at' => $time];
+                            }
+
+                        }
+                    }
+                }
+
+                if(!empty($insert))
+                {
+                    dd($insert);
+                    exit;
+                    Dictionary::insert($insert);
+                    return back()->with('success','上傳成功');
+                }
+            }
+        }
+        return back()->with('error',' 內容格式不符合.');
     }
 
 }

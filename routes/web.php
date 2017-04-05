@@ -32,3 +32,15 @@ Route::get('/test', function () {
     return view('testWord');
 });
 // API-------
+
+
+//excel-------
+//Route::get('importExport', 'MaatwebsiteDemoController@importExport');
+Route::get('downloadExcel/{type}', 'DictionaryController@downloadExcel');
+Route::post('importExcel', 'DictionaryController@importExcel');
+
+
+//test_excel-------
+//Route::get('importExport', 'MaatwebsiteDemoController@importExport');
+//Route::get('downloadExcel/{type}', 'MaatwebsiteDemoController@downloadExcel');
+//Route::post('importExcel', 'MaatwebsiteDemoController@importExcel');

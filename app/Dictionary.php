@@ -91,4 +91,7 @@ class Dictionary extends Model
 
     }
 
+    //excel上傳
+    public $fillable = ['lang', 'word', 'founder', 'created_at', 'updated_at'];
+
 }

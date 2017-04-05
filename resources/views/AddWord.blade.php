@@ -48,13 +48,30 @@
                                     檔案新增
                                 </div>
                                 <div class="panel-body">
-                                    <form action="FilesUpdate" method="post" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                       <p>檔案內容：建立者,語系,詞彙 => user1,zh_TW,abc</p>
-                                       <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
-                                       <input type="file" name="word_File" accept="text" style="display: block;margin-bottom: 20px;">
-                                       <input type="submit" value="上傳檔案">
+                                    @if ($message = Session::get('success'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ Session::get('success') }}
+                                        </div>
+                                    @endif
+
+                                    @if ($message = Session::get('error'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ Session::get('error') }}
+                                        </div>
+                                    @endif
+
+                                    <form action="{{ URL::to('importExcel') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                                        <input type="file" name="excel_file" />
+                                        {{ csrf_field() }}
+                                        <br/>
+                                        <button class="btn btn-default">上傳 CSV or Excel</button>
                                    </form>
+                                        <h5>下載檔案</h5>
+                                        <div style="border: 1px solid #a1a1a1;margin-top: 10px;padding: 10px;">
+                                            <a href="{{ url('downloadExcel/xls') }}"><button class="btn btn-default">下載Excel xls格式</button></a>
+                                            <a href="{{ url('downloadExcel/xlsx') }}"><button class="btn btn-default">下載Excel xlsx格式</button></a>
+                                            <a href="{{ url('downloadExcel/csv') }}"><button class="btn btn-default">下載Excel CSV格式</button></a>
+                                        </div>
                                </div>
                            </div>
                        </div>
