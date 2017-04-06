@@ -143,7 +143,7 @@ class DictionaryController extends Controller
             echo $word ."已存在字典中";
         }
 
-        return redirect('search_words');
+        return redirect('searchwords');
     }
 
     public function DeleteWords(Request $request )
@@ -152,7 +152,7 @@ class DictionaryController extends Controller
         $dictionary_model = new Dictionary;
         $dictionary_model->DeleteWord($id);
         $request->session()->flash('alert-danger', '刪除成功');
-        return redirect('search_words');
+        return redirect('searchwords');
     }
 
     public function FilesUpdate(Request $request )

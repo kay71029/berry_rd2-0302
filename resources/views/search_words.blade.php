@@ -65,7 +65,7 @@
                                     <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                                 @endif
                             @endforeach
-                        </div> <!-- end .flash-message -->
+                        </div>
 
                         <div class = "panel-heading">
                             查詢結果
@@ -91,7 +91,7 @@
                                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever1={{ $word->id }} data-whatever2={{ $word->lang }} data-whatever3={{ $word->word }}>修改</button>
                                         </td>
                                         <td>
-                                            <a href="/deleteword?id={{$word->id}}" class="btn btn-default navbar-btn">刪除</a>
+                                            <a href="/deletewords?id={{$word->id}}" class="btn btn-default navbar-btn">刪除</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -111,7 +111,7 @@
                     <h4 class="modal-title" id="exampleModalLabel">修改詞彙</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" action="modifyword" method="GET">
+                    <form role="form" action="modifywords" method="get">
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">語系:</label>
                             <input type="text" class="form-control" id="lang" name="lang" value="lang" required>
