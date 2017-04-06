@@ -1,39 +1,29 @@
 <?php
 
 /*
- * 詞彙
+ * 詞彙字典
  */
-//Web------
-
+//Web---------------------
 //查詢詞彙
-Route::GET('searchword', 'DictionaryController@QueryWords');
+Route::get('searchwords', 'DictionaryController@QueryWords');
 //增加詞彙
-Route::GET('addword', 'DictionaryController@CreateWords');
+Route::get('addwords', 'DictionaryController@CreateWords');
 //刪除詞彙
-Route::GET('deleteword', 'DictionaryController@DeleteWords');
+Route::get('deletewords', 'DictionaryController@DeleteWords');
 //增加詞彙
-Route::GET('addword', 'DictionaryController@CreateWords');
-Route::GET('insertwords', 'DictionaryController@InsertWords');
-
-Route::POST('FilesUpdate', 'DictionaryController@FilesUpdate');
+Route::get('addwords', 'DictionaryController@CreateWords');
+Route::get('insertwords', 'DictionaryController@InsertWords');
+Route::get('downloadExcel/{type}', 'DictionaryController@downloadExcel');
+Route::post('importExcel', 'DictionaryController@importExcel');
+Route::post('FilesUpdate', 'DictionaryController@FilesUpdate');
 //修改詞彙
-Route::GET('modifyword', 'DictionaryController@ModifyWords');
-
+Route::get('modifywords', 'DictionaryController@ModifyWords');
 
 
 //統計字彙
 Route::get('/sumword', function () {
     return view('SumWord');
 });
-
-
-
 Route::get('/test', function () {
     return view('testWord');
 });
-// API-------
-
-
-//excel---
-Route::get('downloadExcel/{type}', 'DictionaryController@downloadExcel');
-Route::post('importExcel', 'DictionaryController@importExcel');
