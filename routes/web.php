@@ -21,8 +21,8 @@ Route::get('modifywords', 'DictionaryController@ModifyWords');
 
 
 //統計字彙
-Route::get('/sumword', function () {
-    return view('SumWord');
+Route::get('/sumwords', function () {
+    return view('sum_words');
 });
 Route::get('/test', function () {
     return view('testWord');

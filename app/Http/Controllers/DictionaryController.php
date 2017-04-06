@@ -72,7 +72,7 @@ class DictionaryController extends Controller
         }
 
         $request->session()->flash('alert-danger', $massage);
-        return view('/SearchWord', ['ret_lang' => $ret, 'words' => $ret_word]);
+        return view('/search_words', ['ret_lang' => $ret, 'words' => $ret_word]);
     }
 
     public function CreateWords()
@@ -80,7 +80,7 @@ class DictionaryController extends Controller
         $langSystem_model = new Language;
         $ret = $langSystem_model->AllLangSystem();
         unset($ret[0]);
-        return view('/addWord', ['ret_lang' => $ret]);
+        return view('/add_words', ['ret_lang' => $ret]);
     }
 
     public function InsertWords(Request $request)
@@ -118,7 +118,7 @@ class DictionaryController extends Controller
         $langSystem_model = new Language;
         $ret = $langSystem_model->AllLangSystem();
         unset($ret[0]);
-        return view('/addWord', ['ret_lang' => $ret]);
+        return view('/add_words', ['ret_lang' => $ret]);
 
     }
 
@@ -143,7 +143,7 @@ class DictionaryController extends Controller
             echo $word ."已存在字典中";
         }
 
-        return redirect('searchword');
+        return redirect('search_words');
     }
 
     public function DeleteWords(Request $request )
@@ -152,7 +152,7 @@ class DictionaryController extends Controller
         $dictionary_model = new Dictionary;
         $dictionary_model->DeleteWord($id);
         $request->session()->flash('alert-danger', '刪除成功');
-        return redirect('searchword');
+        return redirect('search_words');
     }
 
     public function FilesUpdate(Request $request )
