@@ -15,14 +15,20 @@ class Language extends Model
         return $ret;
     }
 
-
-
-    //查詢語系
-    public function LangSystem($lang)
+    //比對語系
+    public function checkLang($lang)
     {
-        $array = Language::select( 'lang' )
+        $ret = Dictionary::select( 'lang' )
             -> where( 'lang','=', $lang )
-            -> get();
-        return $array;
+            -> count();
+        if ($ret == 0)
+        {
+            return true;
+        }
+
+        if ($ret > 0)
+        {
+            return false;
+        }
     }
 }

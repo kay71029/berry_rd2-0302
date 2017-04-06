@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Excel;
 use App\Language;
 use App\Dictionary;
 use App\File;
@@ -224,4 +225,66 @@ class DictionaryController extends Controller
 
     }
 
+    public function downloadExcel(Request $request, $type)
+    {
+        $data = Dictionary::get()->toArray();
+        return Excel::create('dictionary', function($excel) use ($data) {
+            $excel->sheet('badword', function($sheet) use ($data)
+            {
+                $sheet->fromArray($data);
+            });
+        })->download($type);
+    }
+
+    public function importExcel(Request $request)
+    {
+
+        if($request->hasFile('import_file'))
+        {
+            $path = $request->file('import_file')->getRealPath();
+            $data = Excel::load($path, function($reader) {})->get();
+
+            if (!empty($data))
+            {
+                $insert = $data->toArray();
+
+                foreach($insert as $key =>$value)
+                {
+                    if(is_array($value))
+                    {
+                        date_default_timezone_set('Asia/Taipei');
+                        $time = Date("Y-m-d H:i:s");
+
+                        $dictionary_model = new Dictionary;
+                        $ret_word = $dictionary_model->checkWord($value['word']);
+                        $lang_model = new Language();
+                        $lang_system = $lang_model->checkLang($value['lang']);
+
+
+                        if ( $value['lang'] != null && $value['word'] != null && $value['founder'] != null &&
+                            $lang_system == false && $ret_word == true)
+                        {
+
+                            $insert_words[] = ['lang' => $value['lang'], 'word' => $value['word'], 'founder' => $value['founder'],
+                                'created_at' => $time, 'updated_at' => $time];
+                        }
+
+                        if ($lang_system != false || $ret_word != true  || $value['founder'] == null)
+                        {
+                            $insert_false[] = ['lang' => $value['lang'], 'word' => $value['word'], 'founder' => $value['founder'],
+                                'created_at' => $time, 'updated_at' => $time];
+                        }
+                    }
+
+                }
+
+                if (!empty($insert_words))
+                {
+                    Dictionary::insert($insert_words);
+                    return back()->with('success', 'Insert Record successfully.');
+                }
+            }
+        }
+        return back()->with('error','Please Check your file, Something is wrong there.');
+    }
 }

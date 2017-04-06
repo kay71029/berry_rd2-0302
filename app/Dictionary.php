@@ -91,4 +91,5 @@ class Dictionary extends Model
 
     }
 
+    public $fillable = ['lang','word','founder','created_at','updated_at'];
 }

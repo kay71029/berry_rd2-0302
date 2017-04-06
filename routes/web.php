@@ -32,3 +32,8 @@ Route::get('/test', function () {
     return view('testWord');
 });
 // API-------
+
+
+//excel---
+Route::get('downloadExcel/{type}', 'DictionaryController@downloadExcel');
+Route::post('importExcel', 'DictionaryController@importExcel');

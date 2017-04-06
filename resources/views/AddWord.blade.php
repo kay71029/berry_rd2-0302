@@ -48,78 +48,35 @@
                                     檔案新增
                                 </div>
                                 <div class="panel-body">
-                                    <form action="FilesUpdate" method="post" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                       <p>檔案內容：建立者,語系,詞彙 => user1,zh_TW,abc</p>
-                                       <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
-                                       <input type="file" name="word_File" accept="text" style="display: block;margin-bottom: 20px;">
-                                       <input type="submit" value="上傳檔案">
-                                   </form>
-                               </div>
+                                    @if ($message = Session::get('success'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ Session::get('success') }}
+                                        </div>
+                                    @endif
+                                    @if ($message = Session::get('error'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ Session::get('error') }}
+                                        </div>
+                                    @endif
+                                    <form action="{{ URL::to('importExcel') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                                        <input type="file" name="import_file" />
+                                        {{ csrf_field() }}
+                                        <br/>
+                                        <button class="btn btn-default">上傳 CSV or Excel</button>
+                                    </form>
+                                    <br/>
+                                        <h5>下載檔案</h5>
+                                        <div style="border: 1px solid #a1a1a1;margin-top: 10px;padding: 10px;">
+                                            <a href="{{ url('downloadExcel/xls') }}"><button class="btn btn-default">Download Excel xls</button></a>
+                                            <a href="{{ url('downloadExcel/xlsx') }}"><button class="btn btn-default">Download Excel xlsx</button></a>
+                                            <a href="{{ url('downloadExcel/csv') }}"><button class="btn btn-default">Download CSV</button></a>
+                                        </div>
+                                </div>
                            </div>
                        </div>
                    </div>
                </div>
-               {{--<div class="panel-body">--}}
-                    {{--<div class = "panel panel-default">--}}
-                        {{--<div class = "panel-heading">--}}
-                            {{--新增結果--}}
-                        {{--</div>--}}
-                        {{--<div class="table-responsive">--}}
-                            {{--<table class="table table-striped table-bordered table-hover">--}}
-                                {{--<thead>--}}
-                                {{--<tr>--}}
-                                    {{--<th>編號</th>--}}
-                                    {{--<th>語系</th>--}}
-                                    {{--<th>詞彙</th>--}}
-                                    {{--<th>修改</th>--}}
-                                    {{--<th>刪除</th>--}}
-                                {{--</tr>--}}
-                                {{--</thead>--}}
-                                {{--<tbody>--}}
-
-                                {{--</tbody>--}}
-                            {{--</table>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
             </div>
         </div>
     </div>
-    {{--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">--}}
-        {{--<div class="modal-dialog" role="document">--}}
-            {{--<div class="modal-content">--}}
-                {{--<div class="modal-header">--}}
-                    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}}
-                    {{--<h4 class="modal-title" id="exampleModalLabel">修改詞彙</h4>--}}
-                {{--</div>--}}
-                {{--<div class="modal-body">--}}
-                    {{--<form role="form" action="modifyword" method="GET">--}}
-                        {{--<div class="form-group">--}}
-                            {{--<label for="recipient-name" class="control-label">語系:</label>--}}
-                            {{--<input type="text" class="form-control" id="recipient-name" name="lang" value="lang">--}}
-                            {{--lang--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label for="message-text" class="control-label">詞彙:</label>--}}
-                                {{--<textarea class="form-control" id="message-text" name="update_word" value="update_word"></textarea>--}}
-                            {{--</div>--}}
-                            {{--<div class="modal-footer">--}}
-                                {{--<input type="hidden" value="{{$word->id}}" name="id"/>--}}
-                                {{--<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>--}}
-                                {{--<button type="submit" class="btn btn-primary">送出</button>--}}
-                            {{--</div>--}}
-                    {{--</form>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--<script>--}}
-        {{--$('#exampleModal').on('show.bs.modal', function (event) {--}}
-            {{--var button = $(event.relatedTarget)--}}
-            {{--var recipient = button.data('whatever')--}}
-            {{--var modal = $(this)--}}
-            {{--modal.find('.modal-title').text('New message to ' + recipient)--}}
-            {{--modal.find('.modal-body input').val(recipient)--}}
-        {{--})--}}
-    {{--</script>--}}
 @endsection
