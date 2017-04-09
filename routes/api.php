@@ -29,6 +29,11 @@ Route::get('/user', function (Request $request) {
 
 //修改詞彙
 
-//查詢詞彙
+//查詢字典所有詞彙
+Route::post('dictionary/word', 'ApiDictionaryController@AllWords');
+//查詢單一詞彙
+Route::get('dictionary/word/{word}', 'ApiDictionaryController@checkWord');
+//依照語系查詢
+Route::get('dictionary/lang/{lang}', 'ApiDictionaryController@languageSystemQueryWords');
 
 //刪除詞彙

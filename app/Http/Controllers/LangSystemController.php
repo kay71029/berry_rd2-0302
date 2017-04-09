@@ -14,7 +14,7 @@ class LangSystemController extends Controller
     }
 
     //查詢語系
-    public function LangSystem($lang="en_US")
+    public function LangSystem($lang)
     {
         $langSystem_model = new Language;
         $array = $langSystem_model->LangSystem($lang );
