@@ -5,9 +5,28 @@ namespace App\Http\Controllers;
 use App\Language;
 use App\Dictionary;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\DictionaryRequest;
 class ApiDictionaryController extends Controller
 {
+    /**
+     * @description: 新增詞彙
+     * @author: kay_yu
+     * @param: null
+     * @return: Json String response
+     */
+    public function CreateWords(DictionaryRequest $request)
+    {
+
+        $ret = $request->all();
+
+        if(!$ret)
+        {
+            return response()->json(['message'=>'error of vehicle','code'=>404],404);
+        }
+
+        Dictionary::insert($ret);
+        return response()->json(['message'=>'The vehicles associated was created','code'=>201],201);
+    }
 
     /**
      * @description: 查詢所有詞彙
