@@ -6,11 +6,12 @@ use App\Language;
 use App\Dictionary;
 use Illuminate\Http\Request;
 use App\Http\Requests\DictionaryRequest;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 class ApiDictionaryController extends Controller
 {
     /**
      * @description: 新增詞彙
-     * @author: kay_yu
      * @param: null
      * @return: Json String response
      */
@@ -30,59 +31,66 @@ class ApiDictionaryController extends Controller
 
     /**
      * @description: 修改詞彙
-     * @author: kay_yu
-     * @param: word
+     * @param: id
      * @return: Json String response
      */
-    public function UpdateWords( DictionaryRequest $request ,$lang ,$word ,$founder )
+    public function UpdateWords(DictionaryRequest $request ,$id)
     {
-
-//        $ret = Dictionary::select( 'id' )
-//            -> where( 'lang','=', $lang )
-//            -> where( 'word','=', $word )
-//            -> where( 'founder','=', $founder )
-//            -> get();
-//
-//        $update_word =Dictionary::find($ret);
-//
-//        $ret = $request->only(['lang', 'word', 'founder']);
-//
-//        $lang =$request->get ('lang');
-//        $word =$request->get ('word');
-//        $founder =$request->get ('founder');
-//
-//        $update_word->lang = $lang;
-//        $update_word->word = $word;
-//        $update_word->founder = $founder;
-//
-//        $update_word->save();
-
-        //Dictionary::insert($ret);
-
-        return response()->json(['result' => true, 'ret' => $ret, 'message' => '新增成功', 'error' => null], 201);
-    }
-
-    /**
-     * @description: 查詢所有詞彙
-     * @author: kay_yu
-     * @param: null
-     * @return: Json String response
-     */
-    public function AllWords()
-    {
-        $ret = Dictionary::all();
-        $count = count($ret);
+        $ret = Dictionary::find($id);
 
         if (!$ret) {
             return response()->json(['result' => false, 'ret' => $ret, 'message' => 'Not Found', 'error' => 404], 404);
         }
 
-        return response()->json(['result' => true, 'ret' => $ret, 'message' => '查詢成功,總計'.$count.'筆資料', 'error' => null], 200);
+        $lang =$request->input ('lang');
+        $word =$request->input ('word');
+        $founder =$request->input ('founder');
+
+        $ret->lang = $lang;
+        $ret->word = $word;
+        $ret->founder = $founder;
+        $ret->save();
+
+        return response()->json(['result' => true, 'ret' => $ret, 'message' => '修改成功', 'error' => null], 200);
+    }
+
+    /**
+     * @description: 刪除詞彙
+     * @param: id
+     * @return: Json String response
+     */
+    public function DeleteWords(Request $request ,$id)
+    {
+        $ret = Dictionary::find($id);
+
+        if (!$ret) {
+            return response()->json(['result' => false, 'ret' => $ret, 'message' => 'Not Found', 'error' => 404], 404);
+        }
+
+        $ret->delete();
+
+        return response()->json(['result' => true, 'ret' => $ret, 'message' => '刪除成功', 'error' => null], 200);
+    }
+
+    /**
+     * @description: 查詢所有詞彙
+     * @param: null
+     * @return: Json String response
+     */
+    public function AllWords()
+    {
+            $ret = Dictionary::all();
+            $count = count($ret);
+
+            if (!$ret) {
+                return response()->json(['result' => false, 'ret' => $ret, 'message' => 'Not Found', 'error' => 404], 404);
+            }
+
+            return response()->json(['result' => true, 'ret' => $ret, 'message' => '查詢成功,總計' . $count . '筆資料', 'error' => null], 200);
     }
 
     /**
      * @description: 查詢單一詞彙
-     * @author: kay_yu
      * @param: word
      * @return: Json String response
      */
@@ -106,7 +114,6 @@ class ApiDictionaryController extends Controller
 
     /**
      * @description: 依照語系查詢詞彙
-     * @author: kay_yu
      * @param: lang
      * @return: Json String response
      */

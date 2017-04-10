@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::get('/user', function (Request $request) {
-//    return $request->user();
-//})->middleware('auth:api');
 
 //新增語系
 
@@ -28,12 +25,12 @@ use Illuminate\Http\Request;
 //新增詞彙
 Route::post('dictionary/word/', 'ApiDictionaryController@CreateWords');
 //修改詞彙
-Route::post('dictionary/lang/{lang}/word/{word}/{founder}', 'ApiDictionaryController@UpdateWords');
+Route::put('dictionary/word/{id}', 'ApiDictionaryController@UpdateWords');
+//刪除詞彙
+Route::delete('dictionary/word/{id}', 'ApiDictionaryController@DeleteWords');
 //查詢字典所有詞彙
 Route::post('dictionary/', 'ApiDictionaryController@AllWords');
 //查詢單一詞彙
 Route::get('dictionary/word/{word}', 'ApiDictionaryController@checkWord');
 //依照語系查詢
 Route::get('dictionary/lang/{lang}', 'ApiDictionaryController@languageSystemQueryWords');
-
-//刪除詞彙
