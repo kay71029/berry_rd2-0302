@@ -28,7 +28,7 @@ use Illuminate\Http\Request;
 //新增詞彙
 Route::post('dictionary/word/', 'ApiDictionaryController@CreateWords');
 //修改詞彙
-
+Route::post('dictionary/lang/{lang}/word/{word}/{founder}', 'ApiDictionaryController@UpdateWords');
 //查詢字典所有詞彙
 Route::post('dictionary/', 'ApiDictionaryController@AllWords');
 //查詢單一詞彙

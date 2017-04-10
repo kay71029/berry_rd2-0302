@@ -26,7 +26,7 @@ class DictionaryRequest extends Request
     {
         return
             [
-                'lang'=>'required',
+                'lang'=>'required|exists:languages',
                 'word' =>'required|unique:dictionaries',
                 'founder' =>'required',
             ];
@@ -34,6 +34,6 @@ class DictionaryRequest extends Request
 
     public function response(array $errors)
     {
-        return response()->json(['message'=>$errors,'code'=>422],422);
+        return response()->json(['result' => true, 'ret' => null, 'message' => $errors, 'error' => 422], 422);
     }
 }

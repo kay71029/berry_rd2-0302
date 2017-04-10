@@ -10,7 +10,7 @@ class Dictionary extends Model
 
     protected $fillable = ['id', 'lang', 'word', 'founder'];
 
-    protected $hidden = ['id', 'created_at', 'updated_at', 'founder', 'lang'];
+    protected $hidden = [ 'created_at', 'updated_at', 'founder' ];
 
     //不分語系查詢字彙字彙
     public function searchAllWord()
