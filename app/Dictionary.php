@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Paginator;
 class Dictionary extends Model
 {
+    protected $table = 'dictionaries';
+
+    protected $fillable = ['id', 'lang', 'word', 'founder'];
+
+    protected $hidden = ['id', 'created_at', 'updated_at', 'founder', 'lang'];
+
     //不分語系查詢字彙字彙
     public function searchAllWord()
     {
@@ -91,5 +97,5 @@ class Dictionary extends Model
 
     }
 
-    public $fillable = ['lang','word','founder','created_at','updated_at'];
+    //public $fillable = ['lang','word','founder','created_at','updated_at'];
 }
