@@ -19,10 +19,10 @@
                             </label>
                         @endforeach
                     </div>
-                    <div class="form-group">
-                        <label>建立者</label>
-                        <input class="form-control" placeholder="name" name="founder" value="founder" required>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<label>建立者</label>--}}
+                        {{--<input class="form-control" placeholder="name" name="founder" value="founder" required>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <label>可新增多筆資料，請已“,”來區隔</label>
                         <textarea class="form-control" rows="5" name="word_insert" value="word_insert" required></textarea>

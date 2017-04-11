@@ -17,7 +17,6 @@ class CreateDictionariesTable extends Migration
             $table->increments('id');
             $table->string('lang');
             $table->string('word');
-            $table->string('founder');
             $table->timestamps();
 
         });

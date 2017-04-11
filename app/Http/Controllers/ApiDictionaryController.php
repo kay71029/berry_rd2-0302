@@ -5,11 +5,88 @@ namespace App\Http\Controllers;
 use App\Language;
 use App\Dictionary;
 use Illuminate\Http\Request;
-use App\Http\Requests\DictionaryRequest;
+use App\Http\Requests\LanguageRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ApiDictionaryController extends Controller
 {
+    /**
+     * @description: 新增語系
+     * @param: lang
+     * @return: Json String response
+     */
+    public function CreateLanguage( LanguageRequest $request )
+    {
+
+        $ret = $request->only(['lang']);
+
+        if (!$ret) {
+            return response()->json(['result' => false, 'ret' => $ret, 'message' => 'Not Found', 'error' => 404], 404);
+        }
+
+        Language::insert($ret);
+
+        return response()->json(['result' => true, 'ret' => $ret, 'message' => '新增語系成功', 'error' => null], 201);
+    }
+
+    /**
+     * @description: 修改語系
+     * @param: id
+     * @return: Json String response
+     */
+    public function UpdateLanguage(LanguageRequest $request ,$id)
+    {
+        $ret = Language::find($id);
+
+        if (!$ret) {
+            return response()->json(['result' => false, 'ret' => $ret, 'message' => 'Not Found', 'error' => 404], 404);
+        }
+
+        $lang =$request->input ('lang');
+        $ret->lang = $lang;
+        $ret->save();
+
+        return response()->json(['result' => true, 'ret' => $ret, 'message' => '修改成功', 'error' => null], 200);
+    }
+
+
+    /**
+     * @description: 查詢所有語系
+     * @param: null
+     * @return: Json String response
+     */
+    public function QueryAllLanguage()
+    {
+        $ret = Language::all();
+        $count = count($ret);
+
+        if (!$ret) {
+            return response()->json(['result' => false, 'ret' => $ret, 'message' => 'Not Found', 'error' => 404], 404);
+        }
+
+        return response()->json(['result' => true, 'ret' => $ret, 'message' => '查詢成功,總計' . $count . '筆資料', 'error' => null], 200);
+    }
+
+    /**
+     * @description: 刪除語系
+     * @param: id
+     * @return: Json String response
+     */
+    public function DeleteLanguage(Request $request ,$id)
+    {
+        $ret = Language::find($id);
+
+        if (!$ret) {
+            return response()->json(['result' => false, 'ret' => $ret, 'message' => 'Not Found', 'error' => 404], 404);
+        }
+
+        $ret->delete();
+
+        return response()->json(['result' => true, 'ret' => $ret, 'message' => '刪除成功', 'error' => null], 200);
+    }
+
+
+
     /**
      * @description: 新增詞彙
      * @param: null
@@ -77,7 +154,7 @@ class ApiDictionaryController extends Controller
      * @param: null
      * @return: Json String response
      */
-    public function AllWords()
+    public function QueryAllWords()
     {
             $ret = Dictionary::all();
             $count = count($ret);
@@ -94,7 +171,7 @@ class ApiDictionaryController extends Controller
      * @param: word
      * @return: Json String response
      */
-    public function checkWord($word)
+    public function QueryOneWord($word)
     {
         $ret = Dictionary::select( 'id','lang','word' )
             -> where( 'word','=', $word )
@@ -117,7 +194,7 @@ class ApiDictionaryController extends Controller
      * @param: lang
      * @return: Json String response
      */
-    public function languageSystemQueryWords($lang)
+    public function QueryWordsByLang($lang)
     {
         $ret = Dictionary::select( 'id','lang', 'word' )
             -> where( 'lang','=', $lang )

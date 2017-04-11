@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
+    protected $table = 'languages';
+
+    protected $fillable = ['id', 'lang'];
+
+   // protected $hidden = [ 'created_at', 'updated_at' ];
     //列出所有語系
     public function AllLangSystem()
     {

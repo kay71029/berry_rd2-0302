@@ -87,7 +87,6 @@ class DictionaryController extends Controller
     {
         //新增詞彙
         date_default_timezone_set('Asia/Taipei');
-        $founder = $request->get('founder');
         $time = Date("Y-m-d H:i:s");
         $lang = $request->get('lang');
         $word_insert = $request->get('word_insert');
@@ -101,8 +100,7 @@ class DictionaryController extends Controller
 
             if ( $ret_word == true && $word_value != null)
             {
-                $array = array('lang' => $lang, 'word' => $word_value, 'founder' => $founder, 'created_at' => $time,
-                   'updated_at' => $time);
+                $array = array('lang' => $lang, 'word' => $word_value, 'created_at' => $time, 'updated_at' => $time);
 
                 $dictionary_model = new Dictionary;
                 $dictionary_model->AddWord($array);
@@ -157,7 +155,6 @@ class DictionaryController extends Controller
 
     public function FilesUpdate(Request $request )
     {
-        $founder = $request->get('founder');
         $lang = $request->get('lang');
         //取得檔案暫存路徑
         $file = $request->file('word_File');
@@ -261,18 +258,15 @@ class DictionaryController extends Controller
                         $lang_system = $lang_model->checkLang($value['lang']);
 
 
-                        if ( $value['lang'] != null && $value['word'] != null && $value['founder'] != null &&
-                            $lang_system == false && $ret_word == true)
+                        if ( $value['lang'] != null && $value['word'] != null && $lang_system == false && $ret_word == true)
                         {
 
-                            $insert_words[] = ['lang' => $value['lang'], 'word' => $value['word'], 'founder' => $value['founder'],
-                                'created_at' => $time, 'updated_at' => $time];
+                            $insert_words[] = ['lang' => $value['lang'], 'word' => $value['word'], 'created_at' => $time, 'updated_at' => $time];
                         }
 
-                        if ($lang_system != false || $ret_word != true  || $value['founder'] == null)
+                        if ($lang_system != false || $ret_word != true )
                         {
-                            $insert_false[] = ['lang' => $value['lang'], 'word' => $value['word'], 'founder' => $value['founder'],
-                                'created_at' => $time, 'updated_at' => $time];
+                            $insert_false[] = ['lang' => $value['lang'], 'word' => $value['word'], 'created_at' => $time, 'updated_at' => $time];
                         }
                     }
 

@@ -22,7 +22,6 @@ class DictionariesTableSeeder extends Seeder
             DB::table('dictionaries')->insert([
                 'lang' => 'en_US',
                 'word' => $faker->unique()->word,
-                'founder' =>'user1',
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime,
             ]);
@@ -32,7 +31,6 @@ class DictionariesTableSeeder extends Seeder
             DB::table('dictionaries')->insert([
                 'lang' => 'zh_CN',
                 'word' => $faker2->unique()->name,
-                'founder' =>'user2',
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime,
             ]);
@@ -42,7 +40,6 @@ class DictionariesTableSeeder extends Seeder
             DB::table('dictionaries')->insert([
                 'lang' => 'zh_TW',
                 'word' => $faker3->unique()->name,
-                'founder' =>'user3',
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime,
             ]);
